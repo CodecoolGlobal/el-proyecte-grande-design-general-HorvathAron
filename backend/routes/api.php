@@ -4,6 +4,7 @@ use App\Http\Controllers\NewsFeedController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ChatMessageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,6 +29,12 @@ Route::post("login",[UserController::class,'login']);
 
 Route::post('users/register', [UserController::class, 'register']);
 
+Route::get('chat', [ChatMessageController::class, 'getMessageByUser']);
+
+Route::post('new-message', [ChatMessageController::class, 'addMessage']);
+
+Route::delete('delete-message', [ChatMessageController::class, 'deleteMessage']);
+
 // Routes for News Feed
 Route::get('news-feed/getall', [NewsFeedController::class, 'getAll']);
 Route::get('news-feed/get-by-event', [NewsFeedController::class, 'getByEvent']);
@@ -37,7 +44,7 @@ Route::post('news-feed/delete', [NewsFeedController::class, 'deleteFeed']);
 
 Route::get('/events', [\App\Http\Controllers\EventController::class, 'getAllEvents']);
 
-Route::post('/participants/even-tid', [\App\Http\Controllers\ParticipantController::class, 'getParticipantsByEventId']);
+Route::post('/participants/even-id', [\App\Http\Controllers\ParticipantController::class, 'getParticipantsByEventId']);
 Route::post('/participants/user-id', [\App\Http\Controllers\ParticipantController::class, 'getEventsByUserId']);
 
 Route::post('/events-tags/event-id', [\App\Http\Controllers\EventsTagsController::class, 'getTagsByEventId']);
