@@ -27,3 +27,10 @@ Route::post("login",[UserController::class,'login']);
 
 Route::post('users/register', [UserController::class, 'register']);
 
+Route::get('/events', [\App\Http\Controllers\EventController::class, 'getAllEvents']);
+
+Route::post('/participants/even-tid', [\App\Http\Controllers\ParticipantController::class, 'getParticipantsByEventId']);
+Route::post('/participants/user-id', [\App\Http\Controllers\ParticipantController::class, 'getEventsByUserId']);
+
+Route::post('/events-tags/event-id', [\App\Http\Controllers\EventsTagsController::class, 'getTagsByEventId']);
+Route::post('/events-tags/tag-id', [\App\Http\Controllers\EventsTagsController::class, 'getEventsByTagId']);
