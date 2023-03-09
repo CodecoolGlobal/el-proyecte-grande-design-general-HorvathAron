@@ -13,6 +13,7 @@ class Event extends Model
         return $this->belongsTo(User::class);
     }
 
+    // Ezek UPDATE-elhetőek, illetve új létrehozáskor ezeket lehet megadni.
     protected $fillable =[
         'created_by',
         'title',
@@ -21,8 +22,6 @@ class Event extends Model
         'accepted'
     ];
 
-    protected $hidden =[
-        'created_at'
-    ];
+    // $hidden select-nél ezeket nem rakja bele.
 
 }
