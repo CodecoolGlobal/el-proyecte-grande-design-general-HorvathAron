@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('title');
             $table->string('description');
             $table->timestamp('created_at')->useCurrent();
-            $table->timestamp('event_date');
+            $table->timestamp('event_date')->nullable();
             $table->boolean('accepted')->default(false);
         });
     }
