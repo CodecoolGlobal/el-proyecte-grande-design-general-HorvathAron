@@ -25,3 +25,5 @@ Route::get('/test', function (){
 
 Route::post("login",[UserController::class,'login']);
 
+Route::post('users/register', [UserController::class, 'register']);
+
