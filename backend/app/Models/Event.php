@@ -17,6 +17,10 @@ class Event extends Model
         return $this->hasMany(Participant::class, 'event_id');
     }
 
+    public function tags(){
+        return $this->hasMany(EventsTags::class, 'event_id');
+    }
+
     // Ezek UPDATE-elhetőek, illetve új létrehozáskor ezeket lehet megadni.
     protected $fillable =[
         'created_by',
