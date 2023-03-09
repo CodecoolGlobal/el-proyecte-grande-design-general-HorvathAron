@@ -13,6 +13,10 @@ class Event extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function participants() {
+        return $this->hasMany(Participant::class);
+    }
+
     // Ezek UPDATE-elhetőek, illetve új létrehozáskor ezeket lehet megadni.
     protected $fillable =[
         'created_by',
