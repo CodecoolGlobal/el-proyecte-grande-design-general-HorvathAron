@@ -47,10 +47,21 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+
+
     public function chat(): HasMany
     {
         return $this->hasMany(ChatMessage::class, 'created_by');
     }
 
+    public function feed(): HasMany
+    {
+        return $this->hasMany(NewsFeed::class, 'eventId');
+    }
+
+
+    public function participants() {
+        return $this->hasMany(Participant::class, 'user_id');
+    }
 
 }

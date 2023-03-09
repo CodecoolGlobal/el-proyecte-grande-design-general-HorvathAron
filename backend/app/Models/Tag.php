@@ -12,4 +12,8 @@ class Tag extends Model
     protected $fillable =[
         'name'
     ];
+
+    public function events(){
+        return $this->hasMany(EventsTags::class, 'tag_id');
+    }
 }
