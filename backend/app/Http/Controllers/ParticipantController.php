@@ -22,4 +22,21 @@ class ParticipantController extends Controller
         return response($response, 201);
 
     }
+
+    function getEventsByUserId(Request $request) {
+
+        $events = DB::table('participants')->where('user_id', $request->userId)
+            ->join('events', 'event_id', '=', 'events.id')
+            ->select('events.id', 'events.title', 'events.description', 'events.created_at', 'events.event_date', 'accepted')
+            ->get();
+
+        $response = [
+            'events' => $events
+        ];
+
+        return response($response, 201);
+
+
+
+    }
 }
