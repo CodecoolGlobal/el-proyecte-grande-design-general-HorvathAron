@@ -1,7 +1,6 @@
 <?php
 
-use App\Models\ChatMessage;
-use App\Models\User;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -23,4 +22,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get('/test', function (){
     return 'YEEES it works!!';
 });
+
+Route::post("login",[UserController::class,'login']);
 
