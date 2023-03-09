@@ -32,3 +32,5 @@ Route::get('chat', [ChatMessageController::class, 'getMessageByUser']);
 
 Route::post('new-message', [ChatMessageController::class, 'addMessage']);
 
+Route::delete('delete-message', [ChatMessageController::class, 'deleteMessage']);
+

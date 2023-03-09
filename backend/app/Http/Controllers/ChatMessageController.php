@@ -33,4 +33,16 @@ class ChatMessageController extends Controller
        ];
        return response($response,Response::HTTP_CREATED);
     }
+
+    public function deleteMessage(Request $request) {
+        DB::table("chat_messages")->delete($request->messageId);
+        $deletedMessage = DB::table("chat_messages")->where('id', $request->messageId)->first();
+        if($deletedMessage == null){
+            $response = [
+                "message"=>"Message has been deleted!"
+        ];
+            return response($response,Response::HTTP_OK);
+        }
+        return response(["message"=>"Error! Can't delete this message."],Response::HTTP_BAD_REQUEST);
+    }
 }
