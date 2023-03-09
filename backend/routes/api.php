@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\NewsFeedController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -27,3 +28,10 @@ Route::post("login",[UserController::class,'login']);
 
 Route::post('users/register', [UserController::class, 'register']);
 
+
+
+// Routes for News Feed
+Route::get('news-feed/getall', [NewsFeedController::class, 'getAll']);
+Route::get('news-feed/get-by-event', [NewsFeedController::class, 'getByEvent']);
+Route::get('news-feed/add', [NewsFeedController::class, 'addNewFeed']);
+Route::get('news-feed/delete', [NewsFeedController::class, 'deleteFeed']);

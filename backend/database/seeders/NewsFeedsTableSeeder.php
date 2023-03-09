@@ -16,7 +16,7 @@ class NewsFeedsTableSeeder extends Seeder
         DB::table('news_feeds')->insert([
             "created_by" => 1,
             "eventId" =>1,
-            "message"=> "heyoo!!"
+            "message"=> "next match: Béla vs Jenő"
         ]);
     }
 }
