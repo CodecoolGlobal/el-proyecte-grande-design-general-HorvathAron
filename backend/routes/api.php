@@ -28,3 +28,6 @@ Route::post("login",[UserController::class,'login']);
 Route::post('users/register', [UserController::class, 'register']);
 
 Route::get('/events', [\App\Http\Controllers\EventController::class, 'getAllEvents']);
+
+Route::post('/participants/eventid', [\App\Http\Controllers\ParticipantController::class, 'getParticipantsByEventId']);
+
