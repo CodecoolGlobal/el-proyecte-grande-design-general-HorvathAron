@@ -28,4 +28,27 @@ class UserController extends Controller
 
         return response($response, 201);
     }
+
+    function register(Request $request)
+    {
+        DB::table('users')->insert([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password)
+        ]);
+
+        $user= User::where('email', $request->email)->first();
+
+        if (!$user || !Hash::check($request->password, $user->password)) {
+            return response([
+                'message' => ['Could not create user']
+            ], 404);
+
+        }
+        $response = [
+            'user' => $user,
+        ];
+
+         return response($response, 201);
+    }
 }
