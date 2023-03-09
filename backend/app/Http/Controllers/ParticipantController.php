@@ -10,10 +10,11 @@ class ParticipantController extends Controller
 {
     function getParticipantsByEventId(Request $request)
     {
-        $participants = DB::table('participants')->where('event_id', $request->eventId)
-            ->join('users', 'user_id', '=', 'users.id')
-            ->select('users.id', 'users.name', 'users.email')
-            ->get();
+        $participants = DB::table('participants')
+                            ->where('event_id', $request->eventId)
+                            ->join('users', 'user_id', '=', 'users.id')
+                            ->select('users.id', 'users.name', 'users.email')
+                            ->get();
 
         $response = [
             'participants' => $participants
