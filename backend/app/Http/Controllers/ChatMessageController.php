@@ -36,8 +36,8 @@ class ChatMessageController extends Controller
 
     public function deleteMessage(Request $request) {
         DB::table("chat_messages")->delete($request->messageId);
-        $deletedMessage = DB::table("chat_messages")->where('id', $request->messageId)->first();
-        if($deletedMessage == null){
+        $deletedMessage = DB::table("chat_messages")->where('id', $request->messageId)->get();
+        if($deletedMessage->isEmpty()){
             $response = [
                 "message"=>"Message has been deleted!"
         ];
