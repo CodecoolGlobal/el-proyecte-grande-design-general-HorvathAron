@@ -32,4 +32,9 @@ class Event extends Model
 
     // $hidden select-nél ezeket nem rakja bele.
 
+    public function feed(): HasMany
+    {
+        return $this->hasMany(NewsFeed::class, 'eventId');
+    }
+
 }
