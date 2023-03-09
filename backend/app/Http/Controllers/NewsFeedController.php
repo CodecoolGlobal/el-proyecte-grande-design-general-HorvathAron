@@ -10,7 +10,7 @@ use App\Models\NewsFeed;
 class NewsFeedController extends Controller
 {
     public function getByEvent(Request $request){
-        return Event::find($request->userId)->feed;
+        return Event::find($request->eventId)->feed;
     }
 
     public function getAll(Request $request){
