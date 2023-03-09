@@ -38,8 +38,8 @@ Route::delete('delete-message', [ChatMessageController::class, 'deleteMessage'])
 // Routes for News Feed
 Route::get('news-feed/getall', [NewsFeedController::class, 'getAll']);
 Route::get('news-feed/get-by-event', [NewsFeedController::class, 'getByEvent']);
-Route::get('news-feed/add', [NewsFeedController::class, 'addNewFeed']);
-Route::get('news-feed/delete', [NewsFeedController::class, 'deleteFeed']);
+Route::post('news-feed/add', [NewsFeedController::class, 'addNewFeed']);
+Route::post('news-feed/delete', [NewsFeedController::class, 'deleteFeed']);
 
 
 Route::get('/events', [\App\Http\Controllers\EventController::class, 'getAllEvents']);
