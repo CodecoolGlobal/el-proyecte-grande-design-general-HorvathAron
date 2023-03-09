@@ -10,11 +10,11 @@ class Event extends Model
     use HasFactory;
 
     public function created_by() {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'created_by');
     }
 
     public function participants() {
-        return $this->hasMany(Participant::class);
+        return $this->hasMany(Participant::class, 'event_id');
     }
 
     // Ezek UPDATE-elhetőek, illetve új létrehozáskor ezeket lehet megadni.
