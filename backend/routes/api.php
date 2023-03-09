@@ -28,10 +28,18 @@ Route::post("login",[UserController::class,'login']);
 
 Route::post('users/register', [UserController::class, 'register']);
 
-
-
 // Routes for News Feed
 Route::get('news-feed/getall', [NewsFeedController::class, 'getAll']);
 Route::get('news-feed/get-by-event', [NewsFeedController::class, 'getByEvent']);
 Route::get('news-feed/add', [NewsFeedController::class, 'addNewFeed']);
 Route::get('news-feed/delete', [NewsFeedController::class, 'deleteFeed']);
+
+
+Route::get('/events', [\App\Http\Controllers\EventController::class, 'getAllEvents']);
+
+Route::post('/participants/even-tid', [\App\Http\Controllers\ParticipantController::class, 'getParticipantsByEventId']);
+Route::post('/participants/user-id', [\App\Http\Controllers\ParticipantController::class, 'getEventsByUserId']);
+
+Route::post('/events-tags/event-id', [\App\Http\Controllers\EventsTagsController::class, 'getTagsByEventId']);
+Route::post('/events-tags/tag-id', [\App\Http\Controllers\EventsTagsController::class, 'getEventsByTagId']);
+
