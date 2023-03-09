@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class NewsFeed extends Model
 {
     use HasFactory;
+
+    protected $fillable =[
+        "message",
+        "created_by",
+        "event"
+    ];
 }
