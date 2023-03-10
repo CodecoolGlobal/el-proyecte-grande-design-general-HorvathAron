@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\NewsFeedController;
+use App\Http\Controllers\TagController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -49,4 +50,11 @@ Route::post('/participants/user-id', [\App\Http\Controllers\ParticipantControlle
 
 Route::post('/events-tags/event-id', [\App\Http\Controllers\EventsTagsController::class, 'getTagsByEventId']);
 Route::post('/events-tags/tag-id', [\App\Http\Controllers\EventsTagsController::class, 'getEventsByTagId']);
+
+Route::get('/tags', [TagController::class, 'getAllTags']);
+Route::delete('/tag/delete', [TagController::class, 'deleteTagById']);
+Route::get('/tag', [TagController::class, 'getTagById']);
+Route::post('/tag/new', [TagController::class, 'createNewTag']);
+Route::put('/tag/update', [TagController::class, 'changeTagById']);
+
 

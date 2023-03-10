@@ -6,12 +6,13 @@ use App\Models\Tag;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\DB;
 use mysql_xdevapi\Exception;
 
 class TagController extends Controller{
 
 
-    public function getAllTags()
+    public function getAllTags(Request $request)
     {
         $allTags = Tag::all();
         if(!$allTags){
@@ -20,27 +21,26 @@ class TagController extends Controller{
         return $allTags;
     }
 
-    public function getTagIdByName($tagName){
-        $tagId = Tag::where('name', $tagName)->pluck('id')->first();
-        if(!$tagName){
-            return response(['message' => ['Tag not exist']], 404);
-        }
-        return $tagId;
 
-    }
-
-    public function isTagExistByName($tagName){
-        $tag = Tag::where('name', $tagName)->first();
-        if(!$tagName){
+    /**
+     * @param Request $request
+     * @return bool
+     */
+    public function isTagExistByName(Request $request){
+        $tag = Tag::where('name', $request->newName)->first();
+        if(!$tag){
             return false;
         }
         return true;
 
     }
 
-
-    public function getTagById($tagId) {
-        $tag = Tag::where('id', $tagId)->first();
+    /**
+     * @param Request $request
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Foundation\Application|Response
+     */
+    public function getTagById(Request $request) {
+        $tag = Tag::where('id', $request->tagId)->first();
         if (!$tag) {
             return response(['message' => ['Tag not exist']], 404);
         }
@@ -49,9 +49,9 @@ class TagController extends Controller{
 
 
 
-    public function deleteTagById($tagId) {
+    public function deleteTagById(Request $request) {
         try {
-            Tag::destroy($tagId);
+            Tag::destroy($request->tagId);
             return response(['message' => ['Tag successfully deleted']], 200);
         }catch (ModelNotFoundException $e){
             return response(['message' => ["You cant delete this tag because its don't exist"]], 404);
@@ -59,11 +59,15 @@ class TagController extends Controller{
     }
 
 
-
-    public function changeTagById($tagId,$newName)
+    public function changeTagById(Request $request)
     {
         try {
-            Tag::where('id', $tagId)->update(['name' => $newName]);
+            $tag = Tag::find($request->tagId);
+            if($this->isTagExistByName($request)){
+                return response(['message' => ["Tag with this name already exist"]], 404);
+            }
+            $tag->name = $request->newName;
+            $tag->save();
             return response(['message' => ['Tag successfully updated']], 200);
         }catch (ModelNotFoundException $e){
             return response(['message' => ["You cant update this tag because its don't exist"]], 404);
@@ -72,11 +76,11 @@ class TagController extends Controller{
     }
 
 
-    public function createNewTag($name){
-        if($this->isTagExistByName($name)){
+    public function createNewTag(Request $request){
+        if($this->isTagExistByName($request)){
             return response(['message' => ["Tag with this name already exist"]], 404);
         }
-        Tag::create(['name' => $name]);
+        DB::table('tags')->insert(['name' => $request->name]);
         return response(['message' => ["New tag successfully created"]], 200);
 
     }
