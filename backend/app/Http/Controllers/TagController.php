@@ -35,6 +35,15 @@ class TagController extends Controller{
 
     }
 
+    public function isTagExistById(Request $request){
+        $tag = Tag::where('id', $request->tagId)->first();
+        if(!$tag){
+            return false;
+        }
+        return true;
+
+    }
+
     /**
      * @param Request $request
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Foundation\Application|Response
@@ -49,13 +58,12 @@ class TagController extends Controller{
 
 
 
-    public function deleteTagById(Request $request) {
-        try {
+    public function deleteTagById(Request $request){
+        if($this->isTagExistById($request)){
             Tag::destroy($request->tagId);
-            return response(['message' => ['Tag successfully deleted']], 200);
-        }catch (ModelNotFoundException $e){
-            return response(['message' => ["You cant delete this tag because its don't exist"]], 404);
-        }
+        return response(['message' => ['Tag successfully deleted']], 200);
+    }
+        return response(['message' => ["You cant delete this tag because its don't exist"]], 404);
     }
 
 
