@@ -19,20 +19,12 @@ class ParticipantController extends Controller
 
     }
 
-    function getEventsByUserId(Request $request) {
-
-        $events = DB::table('participants')->where('user_id', $request->userId)
-            ->join('events', 'event_id', '=', 'events.id')
-            ->select('events.id', 'events.title', 'events.description', 'events.created_at', 'events.event_date', 'accepted')
-            ->get();
-
+    function getEventsByUserId(Request $request)
+    {
         $response = [
-            'events' => $events
+            'events' => ParticipantRepository::getEventsByUserId($request->userId)
         ];
 
         return response($response, 201);
-
-
-
     }
 }
