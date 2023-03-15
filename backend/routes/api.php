@@ -46,6 +46,7 @@ Route::post('news-feed/delete', [NewsFeedController::class, 'deleteFeed']);
 
 
 Route::get('/events', [EventController::class, 'getAllEvents']);
+Route::post('/events/id', [EventController::class, 'getEventById']);
 Route::post('/events/add', [EventController::class, 'addEvent']);
 Route::delete('/events/delete', [EventController::class, 'deleteEvent']);
 

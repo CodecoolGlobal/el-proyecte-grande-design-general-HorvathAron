@@ -14,6 +14,14 @@ class EventRepository
         return $events;
     }
 
+    public static function getEventById($id){
+        $event = DB::table('events')
+            ->where('id','=', $id)
+            ->get();
+
+        return $event;
+    }
+
     public static function addEvent($created_by, $title, $description, $event_date)
     {
         $id=DB::table('events')->insertGetId([

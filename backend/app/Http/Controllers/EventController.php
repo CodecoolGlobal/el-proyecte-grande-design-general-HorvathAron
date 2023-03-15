@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Event;
+use App\Models\QueryRepositories\ParticipantRepository;
 use Illuminate\Http\Request;
 use App\Models\QueryRepositories\EventRepository;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,6 +19,14 @@ class EventController extends Controller
         return response($response, 201);
     }
 
+    function getEventById(Request $request)
+    {
+        if (!$request->has('id') || $request->id == null) return \response(['message'=>'No id parameter was given!'], Response::HTTP_NOT_FOUND);
+        else {
+            return \response(ParticipantRepository::getEventsByUserId($request->id), Response::HTTP_OK);
+        }
+    }
+
     function addEvent(Request $request)
     {
         if (!$request->has('created_by') || $request->created_by == null ||
@@ -30,12 +39,13 @@ class EventController extends Controller
         }
     }
 
-    function deleteEvent(Request $request) {
+    function deleteEvent(Request $request)
+    {
         if (!$request->has('id') || $request->id == null) return response(["message" => 'Error! No id was given!'], Response::HTTP_NOT_FOUND);
         else {
             $rowsCount = EventRepository::deleteEvent($request->id);
-            if ($rowsCount!=0) return \response(["message"=>"Event deleted."], Response::HTTP_OK);
-            else return \response(["message"=>"Error! Could not delete event!"], Response::HTTP_NOT_FOUND);
+            if ($rowsCount != 0) return \response(["message" => "Event deleted."], Response::HTTP_OK);
+            else return \response(["message" => "Error! Could not delete event!"], Response::HTTP_NOT_FOUND);
         }
     }
 }
