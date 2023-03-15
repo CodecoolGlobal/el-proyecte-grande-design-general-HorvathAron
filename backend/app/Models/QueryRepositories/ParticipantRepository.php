@@ -28,4 +28,12 @@ class ParticipantRepository
 
         return $events;
     }
+
+    public static function addParticipantToEvent($event_id, $user_id): int {
+    $id = DB::table('participants')->insertGetId([
+            'event_id'=> $event_id,
+            'user_id' => $user_id]);
+
+    return $id;
+    }
 }

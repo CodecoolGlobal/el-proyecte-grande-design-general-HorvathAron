@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ChatMessageController;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\ParticipantController;
 
 /*
 |--------------------------------------------------------------------------
@@ -48,8 +49,9 @@ Route::get('/events', [EventController::class, 'getAllEvents']);
 Route::post('/events/add', [EventController::class, 'addEvent']);
 Route::post('/events/delete', [EventController::class, 'deleteEvent']);
 
-Route::post('/participants/event-id', [\App\Http\Controllers\ParticipantController::class, 'getParticipantsByEventId']);
-Route::post('/participants/user-id', [\App\Http\Controllers\ParticipantController::class, 'getEventsByUserId']);
+Route::post('/participants/event-id', [ParticipantController::class, 'getParticipantsByEventId']);
+Route::post('/participants/user-id', [ParticipantController::class, 'getEventsByUserId']);
+Route::post('/participants/add', [ParticipantController::class, 'addParticipantToEvent']);
 
 Route::post('/events-tags/event-id', [\App\Http\Controllers\EventsTagsController::class, 'getTagsByEventId']);
 Route::post('/events-tags/tag-id', [\App\Http\Controllers\EventsTagsController::class, 'getEventsByTagId']);
