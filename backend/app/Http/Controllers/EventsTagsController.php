@@ -37,4 +37,13 @@ class EventsTagsController extends Controller
             else return \response(["message"=>"Error! Could not delete tag for event!"], Response::HTTP_NOT_FOUND);
         }
     }
+
+    function addTagForEvent(Request $request) {
+        if (!$request->has('event_id') || $request->event_id == null ||
+            !$request->has('tag_id') || $request->tag_id == null) return response(["message" => "Insufficient parameters!"], Response::HTTP_NOT_FOUND);
+        else {
+            $id = EventsTagsRepository::addTagForEvent($request->event_id, $request->tag_id);
+            return \response(['id'=>$id], Response::HTTP_OK);
+        }
+    }
 }

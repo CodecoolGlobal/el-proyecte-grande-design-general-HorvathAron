@@ -58,6 +58,7 @@ Route::delete('/participants/delete', [ParticipantController::class, 'deletePart
 
 Route::post('/events-tags/event-id', [EventsTagsController::class, 'getTagsByEventId']);
 Route::post('/events-tags/tag-id', [EventsTagsController::class, 'getEventsByTagId']);
+Route::post('/events-tags/add', [EventsTagsController::class, 'addTagForEvent']);
 Route::delete('/events-tags/delete', [EventsTagsController::class, 'deleteTagForEvent']);
 
 Route::get('/tags', [TagController::class, 'getAllTags']);
@@ -65,5 +66,3 @@ Route::delete('/tag/delete', [TagController::class, 'deleteTagById']);
 Route::get('/tag', [TagController::class, 'getTagById']);
 Route::post('/tag/new', [TagController::class, 'createNewTag']);
 Route::put('/tag/update', [TagController::class, 'changeTagById']);
-
-
