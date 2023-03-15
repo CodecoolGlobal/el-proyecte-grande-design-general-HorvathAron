@@ -6,6 +6,7 @@ use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ChatMessageController;
+use App\Http\Controllers\EventController;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,7 +44,8 @@ Route::post('news-feed/add', [NewsFeedController::class, 'addNewFeed']);
 Route::post('news-feed/delete', [NewsFeedController::class, 'deleteFeed']);
 
 
-Route::get('/events', [\App\Http\Controllers\EventController::class, 'getAllEvents']);
+Route::get('/events', [EventController::class, 'getAllEvents']);
+Route::post('/events/add', [EventController::class, 'addEvent']);
 
 Route::post('/participants/event-id', [\App\Http\Controllers\ParticipantController::class, 'getParticipantsByEventId']);
 Route::post('/participants/user-id', [\App\Http\Controllers\ParticipantController::class, 'getEventsByUserId']);
