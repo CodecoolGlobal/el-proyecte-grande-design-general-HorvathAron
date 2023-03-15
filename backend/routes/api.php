@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ChatMessageController;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\ParticipantController;
+use App\Http\Controllers\EventsTagsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,18 +47,22 @@ Route::post('news-feed/delete', [NewsFeedController::class, 'deleteFeed']);
 
 
 Route::get('/events', [EventController::class, 'getAllEvents']);
+Route::post('/events/id', [EventController::class, 'getEventById']);
 Route::post('/events/add', [EventController::class, 'addEvent']);
+Route::delete('/events/delete', [EventController::class, 'deleteEvent']);
 
-Route::post('/participants/event-id', [\App\Http\Controllers\ParticipantController::class, 'getParticipantsByEventId']);
-Route::post('/participants/user-id', [\App\Http\Controllers\ParticipantController::class, 'getEventsByUserId']);
+Route::post('/participants/event-id', [ParticipantController::class, 'getParticipantsByEventId']);
+Route::post('/participants/user-id', [ParticipantController::class, 'getEventsByUserId']);
+Route::post('/participants/add', [ParticipantController::class, 'addParticipantToEvent']);
+Route::delete('/participants/delete', [ParticipantController::class, 'deleteParticipantFromEvent']);
 
-Route::post('/events-tags/event-id', [\App\Http\Controllers\EventsTagsController::class, 'getTagsByEventId']);
-Route::post('/events-tags/tag-id', [\App\Http\Controllers\EventsTagsController::class, 'getEventsByTagId']);
+Route::post('/events-tags/event-id', [EventsTagsController::class, 'getTagsByEventId']);
+Route::post('/events-tags/tag-id', [EventsTagsController::class, 'getEventsByTagId']);
+Route::post('/events-tags/add', [EventsTagsController::class, 'addTagForEvent']);
+Route::delete('/events-tags/delete', [EventsTagsController::class, 'deleteTagForEvent']);
 
 Route::get('/tags', [TagController::class, 'getAllTags']);
 Route::delete('/tag/delete', [TagController::class, 'deleteTagById']);
 Route::get('/tag', [TagController::class, 'getTagById']);
 Route::post('/tag/new', [TagController::class, 'createNewTag']);
 Route::put('/tag/update', [TagController::class, 'changeTagById']);
-
-

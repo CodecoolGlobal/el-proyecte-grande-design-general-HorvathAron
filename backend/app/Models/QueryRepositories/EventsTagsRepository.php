@@ -28,4 +28,24 @@ class EventsTagsRepository
 
         return $events;
     }
+
+    public static function deleteTagForEvent(int $eventId, int $tagID): int
+    {
+        $rowsCount = DB::table('events_tags')
+            ->where('event_id', '=', $eventId)
+            ->where('tag_id','=', $tagID)
+            ->delete();
+
+        return $rowsCount;
+    }
+
+    public static function addTagForEvent(int $eventId, int $tagId): int {
+        $id = DB::table('events_tags')
+            ->insertGetId([
+                'event_id'=>$eventId,
+                'tag_id'=>$tagId
+            ]);
+
+        return $id;
+    }
 }
