@@ -29,11 +29,22 @@ class ParticipantRepository
         return $events;
     }
 
-    public static function addParticipantToEvent($event_id, $user_id): int {
-    $id = DB::table('participants')->insertGetId([
-            'event_id'=> $event_id,
+    public static function addParticipantToEvent($event_id, $user_id): int
+    {
+        $id = DB::table('participants')->insertGetId([
+            'event_id' => $event_id,
             'user_id' => $user_id]);
 
-    return $id;
+        return $id;
+    }
+
+    public static function deleteParticipantFromEvent($event_id, $user_id): int
+    {
+        $rowsCount = DB::table('participants')
+            ->where('event_id', '=', $event_id)
+            ->where('user_id', '=', $user_id)
+            ->delete();
+
+        return $rowsCount;
     }
 }

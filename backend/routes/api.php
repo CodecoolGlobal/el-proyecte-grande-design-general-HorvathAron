@@ -47,11 +47,12 @@ Route::post('news-feed/delete', [NewsFeedController::class, 'deleteFeed']);
 
 Route::get('/events', [EventController::class, 'getAllEvents']);
 Route::post('/events/add', [EventController::class, 'addEvent']);
-Route::post('/events/delete', [EventController::class, 'deleteEvent']);
+Route::delete('/events/delete', [EventController::class, 'deleteEvent']);
 
 Route::post('/participants/event-id', [ParticipantController::class, 'getParticipantsByEventId']);
 Route::post('/participants/user-id', [ParticipantController::class, 'getEventsByUserId']);
 Route::post('/participants/add', [ParticipantController::class, 'addParticipantToEvent']);
+Route::delete('/participants/delete', [ParticipantController::class, 'deleteParticipantFromEvent']);
 
 Route::post('/events-tags/event-id', [\App\Http\Controllers\EventsTagsController::class, 'getTagsByEventId']);
 Route::post('/events-tags/tag-id', [\App\Http\Controllers\EventsTagsController::class, 'getEventsByTagId']);

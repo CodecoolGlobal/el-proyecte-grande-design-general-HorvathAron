@@ -36,7 +36,10 @@ class EventRepository
     }
 
     public static function deleteEvent($id): int {
-        $rowsCount = DB::table('events')->where('id', '=', $id)->delete();
+        $rowsCount = DB::table('events')
+            ->where('id', '=', $id)
+            ->delete();
+
         return $rowsCount;
     }
 }
