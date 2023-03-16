@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\ChatMessage;
+use App\Models\QueryRepositories\ChatMessageRepository;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -12,31 +13,30 @@ use function Termwind\render;
 class ChatMessageController extends Controller
 {
     //
-    function getMessageByUser(Request $request) {
-        return User::find($request->userId)->chat;
+    function getMessageByUser(Request $request)
+    {
+        return ChatMessageRepository::getMessageByUser($request);
     }
 
-    public function addMessage(Request $request)
+    public function addMessage(Request $request) : Response
     {
         if (!$request->has('message') || $request->message == null) {
             return response(["message"=>['Error!! Could not create message.']],Response::HTTP_NOT_FOUND);
         }
-        DB::table("chat_messages")->insert([
-            "created_by"=>$request->userId,
-            "message"=>$request->message
-        ]);
 
-       $insertedMessage = DB::table("chat_messages")->latest()->first();
+
+       $insertedMessageId = ChatMessageRepository::createMessage($request);
 
        $response = [
-           "message"=>$insertedMessage
+           "message"=>$insertedMessageId
        ];
        return response($response,Response::HTTP_CREATED);
     }
 
-    public function deleteMessage(Request $request) {
-        DB::table("chat_messages")->delete($request->messageId);
-        $deletedMessage = DB::table("chat_messages")->where('id', $request->messageId)->get();
+    public function deleteMessage(Request $request) : Response
+    {
+        ChatMessageRepository::deleteMessage($request);
+        $deletedMessage = ChatMessageRepository::getMessageById($request);
         if($deletedMessage->isEmpty()){
             $response = [
                 "message"=>"Message has been deleted!"
