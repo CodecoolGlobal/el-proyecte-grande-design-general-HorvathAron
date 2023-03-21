@@ -1,11 +1,12 @@
-import React from 'react';
+import React from "react";
+import {Typography} from "@material-ui/core"
 
-const App= ()=>{
-    return(
+const App = () => {
+     return (
         <div>
-            <h1>App.jsx</h1>
-        </div>
-    )
-}
+            <Typography variant="h1">Hellooo!!</Typography>
 
+        </div>
+     )
+}
 export default App;
