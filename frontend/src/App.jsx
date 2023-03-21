@@ -1,12 +1,9 @@
-import React from "react";
-import {Typography} from "@material-ui/core"
+import Button from '@mui/material/Button';
 
-const App = () => {
-     return (
-        <div>
-            <Typography variant="h1">Hellooo!!</Typography>
-
-        </div>
-     )
+export default function MyApp() {
+  return (
+    <div>
+      <Button variant="contained">Hello World</Button>
+    </div>
+  );
 }
-export default App;
