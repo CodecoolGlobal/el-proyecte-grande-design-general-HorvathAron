@@ -22,7 +22,6 @@ class Event extends Model
         return $this->hasMany(EventsTags::class, 'event_id');
     }
 
-    // Ezek UPDATE-elhetőek, illetve új létrehozáskor ezeket lehet megadni.
     protected $fillable =[
         'created_by',
         'title',
@@ -30,8 +29,6 @@ class Event extends Model
         'event_date',
         'accepted'
     ];
-
-    // $hidden select-nél ezeket nem rakja bele.
 
     public function feed(): HasMany
     {
