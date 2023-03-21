@@ -1,6 +1,6 @@
 import React from "react";
 import { useEffect } from "react";
-import { Typography } from "@material-ui/core";
+import Button from "@mui/material/Button";
 
 const App = () => {
 	const handleCallbackResponse = (response) => {
@@ -25,7 +25,7 @@ const App = () => {
 
 	return (
 		<div>
-			<Typography variant="h1">Hellooo!!</Typography>
+			<Button variant="contained">Hello World</Button>
 
 			<div id="signInDiv"></div>
 		</div>
