@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\DB;
 use App\Models\Event;
 use App\Models\NewsFeed;
+use App\Models\QueryRepositories\NewsFeedRepository;
 
 class NewsFeedController extends Controller
 {
@@ -22,22 +23,15 @@ class NewsFeedController extends Controller
         if (!$request->has('message') || $request->message == null) {
             return response(["message"=>['Error!! Could not create message.']],Response::HTTP_NOT_FOUND);
         }
-        Db::table('news_feeds')->insert([
-            'created_by' => $request->userId,
-            'eventId' => $request->eventId,
-            'message' => $request->message
-        ]);
-        $insertedFeed = DB::table("news_feeds")->latest()->first();
-
-       $response = [
+        $insertedFeed = NewsFeedRepository::createNewFeed($request);
+        $response = [
            "message"=>$insertedFeed
-       ];
-       return response($response,Response::HTTP_CREATED);
+        ];
+        return response($response,Response::HTTP_CREATED);
     }
 
     public function deleteFeed(Request $request){
-        Db::table('news_feeds')->delete($request->feedId);
-        $deletedMessage = DB::table("news_feeds")->where('id', $request->feedId)->get();
+        $deletedMessage = NewsFeedRepository::deleteFeed($request);
         if($deletedMessage->isEmpty()){
             $response = [
                 "message"=>"Feed has been deleted!"

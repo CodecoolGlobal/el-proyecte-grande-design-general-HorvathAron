@@ -6,13 +6,14 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
+use App\Models\QueryRepositories\Userrepository;
 
 class UserController extends Controller
 {
     //
     function login(Request $request)
     {
-        $user= User::where('email', $request->email)->first();
+        $user = Userrepository::findUser($request);
         // print_r($data);
         if (!$user || !Hash::check($request->password, $user->password)) {
             return response([
@@ -32,13 +33,9 @@ class UserController extends Controller
 
     function register(Request $request)
     {
-        DB::table('users')->insert([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password)
-        ]);
+        UserRepository::createUser($request);
 
-        $user= User::where('email', $request->email)->first();
+        $user = Userrepository::findUser($request);
 
         if (!$user || !Hash::check($request->password, $user->password)) {
             return response([
