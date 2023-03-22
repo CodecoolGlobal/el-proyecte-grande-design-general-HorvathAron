@@ -1,25 +1,27 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import jwt_decode from "jwt-decode";
 import Button from "@mui/material/Button";
+import { useUser } from "../Context/UserProvider";
+
 const Login = () => {
-	//change to context
-	const [user, setUser] = useState({});
+	const { user, login, logout } = useUser();
 
 	const handleCallbackResponse = (response) => {
-		console.log("Encoded Token: " + response.credential);
-		let userObject = jwt_decode(response.credential);
-		console.log(userObject);
-		setUser(userObject);
+		const userObject = jwt_decode(response.credential);
+		const creds = { name: userObject.name, email: userObject.email };
+		console.log(creds);
+		login(creds);
+
 		document.getElementById("signInDiv").hidden = true;
 	};
 
-	const handleSignOut = (event) => {
-		setUser({});
+	const handleSignOut = () => {
+		logout();
 		document.getElementById("signInDiv").hidden = false;
 	};
 
 	useEffect(() => {
-		//global google
+		//google
 		window.google.accounts.id.initialize({
 			client_id:
 				"488646322950-v3t6bpc8ach5eno89o5h249ae5h23vvl.apps.googleusercontent.com",
@@ -37,18 +39,9 @@ const Login = () => {
 	return (
 		<div>
 			<div id="signInDiv"></div>
-
-			{Object.keys(user).length !== 0 && (
-				<Button variant="contained" onClick={(e) => handleSignOut(e)}>
-					Sign Out
-				</Button>
-			)}
-			{user && (
-				<div>
-					<img src={user.picture} alt=""></img>
-					<h3>{user.name}</h3>
-				</div>
-			)}
+			<Button variant="contained" onClick={() => handleSignOut()}>
+				Sign Out
+			</Button>
 		</div>
 	);
 };
