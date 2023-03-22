@@ -29,9 +29,9 @@ Route::get('/test', function (){
     return 'YEEES it works!!';
 });
 
-Route::post("login",[UserController::class,'login']);
+Route::post("auth/login",[UserController::class,'login']);
 
-Route::post('users/register', [UserController::class, 'register']);
+Route::post('auth/register', [UserController::class, 'register']);
 
 Route::get('chat', [ChatMessageController::class, 'getMessageByUser']);
 
