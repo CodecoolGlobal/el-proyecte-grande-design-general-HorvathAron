@@ -9,6 +9,7 @@ use App\Http\Controllers\ChatMessageController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\ParticipantController;
 use App\Http\Controllers\EventsTagsController;
+use App\Http\Controllers\CalendarController;
 
 /*
 |--------------------------------------------------------------------------
@@ -66,3 +67,5 @@ Route::delete('/tag/delete', [TagController::class, 'deleteTagById']);
 Route::get('/tag', [TagController::class, 'getTagById']);
 Route::post('/tag/new', [TagController::class, 'createNewTag']);
 Route::put('/tag/update', [TagController::class, 'changeTagById']);
+
+Route::get('/calendar', [CalendarController::class, 'getEventsByMonth']);
