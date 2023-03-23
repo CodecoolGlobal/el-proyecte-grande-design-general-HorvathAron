@@ -5,8 +5,6 @@ import Home from './Components/Home';
 import { BrowserRouter, Routes,Route } from "react-router-dom";
 import Events from './Components/BasicModal';
 
-
-
 const root = ReactDOM.createRoot(
     document.getElementById('root')
   );

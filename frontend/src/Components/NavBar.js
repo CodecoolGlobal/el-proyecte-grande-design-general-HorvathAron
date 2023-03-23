@@ -6,6 +6,7 @@ import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
+import Login from './Login';
 import Container from '@mui/material/Container';
 import Avatar from '@mui/material/Avatar';
 import Tooltip from '@mui/material/Tooltip';
@@ -15,7 +16,7 @@ import { Link } from 'react-router-dom';
 
 const pages = [{text:'Events', url:'/events'}, {text:'Calendar', url:'/calendar'}];
 const settings = [{text:'Logout', url:'/logout'}];
-
+//<Login />
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -57,7 +58,6 @@ function ResponsiveAppBar() {
           >
             GatherGo
           </Typography>
-
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
               size="large"
