@@ -16,9 +16,9 @@ const UserProvider = ({ children }) => {
 	const [loading, setLoading] = useState(true);
 
 	const getMe = useCallback((token) => {
-		fetch("api/auth/me", {
+		fetch("/lara/api/auth/me", {
 			headers: {
-				authorization: `bearer ${token}`,
+				authorization: `Bearer ${token}`,
 			},
 		})
 			.then((r) => r.json())
@@ -42,7 +42,7 @@ const UserProvider = ({ children }) => {
 	}, []);
 
 	const login = (creds) => {
-		fetch("http://gathergo.com/lara/api/auth/login", {
+		fetch("/lara/api/auth/login", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
@@ -61,8 +61,17 @@ const UserProvider = ({ children }) => {
 	};
 
 	const logout = () => {
-		setUser(null);
-		setToken("");
+		fetch("/lara/api/auth/logout", {
+			headers: {
+				authorization: `Bearer ${getToken()}`,
+			},
+		})
+			.then((r) => r.json())
+			.then((response) => {
+				setUser(null);
+				setToken("");
+				console.log(response);
+			});
 	};
 
 	return (

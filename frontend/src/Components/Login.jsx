@@ -9,15 +9,11 @@ const Login = () => {
 	const handleCallbackResponse = (response) => {
 		const userObject = jwt_decode(response.credential);
 		const creds = { name: userObject.name, email: userObject.email };
-		console.log(creds);
 		login(creds);
-
-		document.getElementById("signInDiv").hidden = true;
 	};
 
 	const handleSignOut = () => {
 		logout();
-		document.getElementById("signInDiv").hidden = false;
 	};
 
 	useEffect(() => {
