@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import CardMaker from "./CardMaker";
+import AllEvents from "./AllEvents";
 import {useEffectOnce} from "../hook/useEffectOnce";
 import fetchUrl from "./Fetch";
 const CardLister = () => {
@@ -12,7 +12,7 @@ const CardLister = () => {
 
     return allEvent && (
 
-            <CardMaker events={allEvent}/>
+            <AllEvents events={allEvent}/>
 
     );
 }
