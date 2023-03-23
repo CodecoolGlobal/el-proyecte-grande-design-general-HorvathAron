@@ -23,11 +23,4 @@ Class UserRepository{
         ]);
     }
 
-    public static function updateUserToken(String $email, String $token)
-    {
-        DB::table('users')
-        ->where('email', $email)
-        ->update(['remember_token' => $request->name]);
-    }
-
 }
