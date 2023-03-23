@@ -6,16 +6,17 @@ import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
+import Login from './Login';
 import Container from '@mui/material/Container';
 import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
+import { Link } from 'react-router-dom';
 
-const pages = ['Events', 'Calendar'];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
-
+const pages = [{text:'Events', url:'/events'}, {text:'Calendar', url:'/calendar'}];
+const settings = [{text:'Logout', url:'/logout'}];
+//<Login />
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -57,7 +58,6 @@ function ResponsiveAppBar() {
           >
             GatherGo
           </Typography>
-
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
               size="large"
@@ -88,8 +88,12 @@ function ResponsiveAppBar() {
               }}
             >
               {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
+                <MenuItem key={page.url} onClick={()=>{
+                  handleCloseNavMenu();
+                }}>
+                  <Link to={page.url} style={{textDecoration:'none'}}>
+                    <Typography textAlign="center">{page.text}</Typography>
+                  </Link>
                 </MenuItem>
               ))}
             </Menu>
@@ -115,13 +119,15 @@ function ResponsiveAppBar() {
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
-              <Button
-                key={page}
+              <Link to={page.url} style={{textDecoration:'none'}}>
+              <MenuItem
+                key={page.url}
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
-                {page}
-              </Button>
+                  {page.text}
+              </MenuItem>
+              </Link>
             ))}
           </Box>
 
@@ -148,8 +154,10 @@ function ResponsiveAppBar() {
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
+                <MenuItem key={setting.url} onClick={handleCloseUserMenu}>
+                  <Link to={setting.url} style={{textDecoration:'none'}}>
+                    <Typography textAlign="center">{setting.text}</Typography>
+                  </Link>
                 </MenuItem>
               ))}
             </Menu>
