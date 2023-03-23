@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import App from './App';
 import Home from './Components/Home';
 import { BrowserRouter, Routes,Route } from "react-router-dom";
+import Events from './Components/BasicModal';
 
 
 
@@ -17,7 +18,7 @@ const root = ReactDOM.createRoot(
             <Route index element={<Home />}></Route>
         </Route>
         <Route path="/events" element={<App />}>
-            <Route index element={<Home />}></Route>
+            <Route index element={<Events />}></Route>
         </Route>
     </Routes>
 
