@@ -1,4 +1,4 @@
-import axios from "./axiosinstance";
+import axios from "./Axiosinstance";
 class fetchUrl {
 
     static async post(url,body) {
@@ -21,3 +21,6 @@ class fetchUrl {
     }
 }
 export default fetchUrl;
+
+
+// feat Axiosinstance,Fetch and useEffectOnce created for handling get and post fetches
