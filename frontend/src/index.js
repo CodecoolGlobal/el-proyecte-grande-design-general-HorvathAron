@@ -4,7 +4,7 @@ import App from './App';
 import Home from './Components/Home';
 import { BrowserRouter, Routes,Route } from "react-router-dom";
 import Events from './Components/BasicModal';
-
+import CardLister from './Components/CardLister'
 const root = ReactDOM.createRoot(
     document.getElementById('root')
   );
@@ -14,10 +14,9 @@ const root = ReactDOM.createRoot(
     <Routes>
         <Route path="/" element={<App />}>
             <Route index element={<Home />}></Route>
+            <Route path="/events" element={<CardLister />} />
         </Route>
-        <Route path="/events" element={<App />}>
-            <Route index element={<Events />}></Route>
-        </Route>
+
     </Routes>
 
     </BrowserRouter>
