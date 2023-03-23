@@ -31,8 +31,6 @@ class UserController extends Controller
         }
 
         $token = $user->createToken('bearer')->plainTextToken;
-        // savetoken todo
-        //Userrepository::updateUserToken($request->email, $token);
         $response = [
             'token' => $token
         ];
