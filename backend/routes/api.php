@@ -31,13 +31,10 @@ Route::get('/test', function (){
 });
 
 Route::get('get-all-user', [UserController::class, 'getUsers']);
-
-
 Route::get("auth/me",[UserController::class,'getMe']);
 Route::post("auth/login",[UserController::class,'login']);
 Route::get("auth/logout",[UserController::class,'logout']);
 Route::post('auth/register', [UserController::class, 'register']);
-
 Route::get('chat', [ChatMessageController::class, 'getMessageByUser']);
 
 Route::post('new-message', [ChatMessageController::class, 'addMessage']);
