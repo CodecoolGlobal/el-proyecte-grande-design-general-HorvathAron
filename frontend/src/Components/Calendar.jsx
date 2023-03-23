@@ -10,10 +10,14 @@ import { DayCalendarSkeleton } from '@mui/x-date-pickers/DayCalendarSkeleton';
 import axios from "axios";
 
 
+function getDay(date) {
+  return parseInt(date.slice(8,10));
+}
+
 function getDates(events) {
     const eventDates = [];
     events.map((event) => {
-        eventDates.push(event.event_date);
+        eventDates.push(getDay(event.event_date));
     });
     return eventDates;
 }
@@ -22,11 +26,14 @@ function getDates(events) {
  * ⚠️ No IE11 support
  */
 function fetchEvents(date, { signal }) {
+  const userId = 1;
+  const month = date.month()+1;
+  const year = date.year();
   return new Promise((resolve, reject) => {
     const timeout = setTimeout( async () => {
-        const response =  await axios.get("http://gathergo.com/lara/api/calendar");                         
-        const events = response.data.events;        
-        let daysToHighlight = getDates(events);
+        const response =  await axios.get(`http://gathergo.com/lara/api/calendar?userId=${userId}&month=${month}&year=${year}`);                         
+        const events = response.data;       
+        const daysToHighlight = getDates(events);
         resolve({ daysToHighlight });
     }, 500);
 
@@ -41,7 +48,6 @@ const initialValue = dayjs();
 
 function ServerDay(props) {
   const { highlightedDays = [], day, outsideCurrentMonth, ...other } = props;
-    //TODO
 
   const isSelected =
     !props.outsideCurrentMonth && highlightedDays.indexOf(day.date()) > 0;
@@ -72,7 +78,7 @@ ServerDay.propTypes = {
 export default function DateCalendarServerRequest() {
   const requestAbortController = React.useRef(null);
   const [isLoading, setIsLoading] = React.useState(false);
-  const [highlightedDays, setHighlightedDays] = React.useState([]);
+  const [highlightedDays, setHighlightedDays] = React.useState([13]);
 
   const fetchHighlightedDays = (date) => {
     const controller = new AbortController();
