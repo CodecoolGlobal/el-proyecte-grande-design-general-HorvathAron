@@ -30,9 +30,13 @@ Route::get('/test', function (){
     return 'YEEES it works!!';
 });
 
-Route::post("login",[UserController::class,'login']);
+Route::get('get-all-user', [UserController::class, 'getUsers']);
 
-Route::post('users/register', [UserController::class, 'register']);
+
+Route::get("auth/me",[UserController::class,'getMe']);
+Route::post("auth/login",[UserController::class,'login']);
+Route::get("auth/logout",[UserController::class,'logout']);
+Route::post('auth/register', [UserController::class, 'register']);
 
 Route::get('chat', [ChatMessageController::class, 'getMessageByUser']);
 

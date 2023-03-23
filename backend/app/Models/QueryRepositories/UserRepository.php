@@ -5,7 +5,7 @@ namespace App\Models\QueryRepositories;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Symfony\Component\HttpFoundation\Response;
-use App\Models\NewsFeed;
+use App\Models\User;
 
 Class UserRepository{
 
@@ -14,12 +14,12 @@ Class UserRepository{
         return User::where('email', $request->email)->first();
     }
 
-    public static function createUser(request $request)
+
+    public static function createUser(Request $request)
     {
         DB::table('users')->insert([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => Hash::make($request->password)
         ]);
     }
 
