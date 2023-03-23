@@ -1,14 +1,12 @@
-import React from "react";
-import NavBar from "./Components/NavBar";
+import Layout from "./Components/Layout";
 import UserProvider from "./Context/UserProvider.jsx";
 
-const App = () => {
+export default function App() {
 	return (
-		<UserProvider>
-			<div>
-				<NavBar />
-			</div>
-		</UserProvider>
+		<div className="App">
+			<UserProvider>
+				<Layout />
+			</UserProvider>
+		</div>
 	);
-};
-export default App;
+}
