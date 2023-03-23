@@ -7,22 +7,27 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { PickersDay } from '@mui/x-date-pickers/PickersDay';
 import { DateCalendar } from '@mui/x-date-pickers/DateCalendar';
 import { DayCalendarSkeleton } from '@mui/x-date-pickers/DayCalendarSkeleton';
+import axios from "axios";
 
-function getRandomNumber(min, max) {
-  return Math.round(Math.random() * (max - min) + min);
+
+function getDates(events) {
+    const eventDates = [];
+    events.map((event) => {
+        eventDates.push(event.event_date);
+    });
+    return eventDates;
 }
-
 /**
  * Mimic fetch with abort controller https://developer.mozilla.org/en-US/docs/Web/API/AbortController/abort
  * ⚠️ No IE11 support
  */
-function fakeFetch(date, { signal }) {
+function fetchEvents(date, { signal }) {
   return new Promise((resolve, reject) => {
-    const timeout = setTimeout(() => {
-      const daysInMonth = date.daysInMonth();
-      const daysToHighlight = [1, 2, 3].map(() => getRandomNumber(1, daysInMonth));
-
-      resolve({ daysToHighlight });
+    const timeout = setTimeout( async () => {
+        const response =  await axios.get("http://gathergo.com/lara/api/calendar");                         
+        const events = response.data.events;        
+        let daysToHighlight = getDates(events);
+        resolve({ daysToHighlight });
     }, 500);
 
     signal.onabort = () => {
@@ -36,9 +41,10 @@ const initialValue = dayjs();
 
 function ServerDay(props) {
   const { highlightedDays = [], day, outsideCurrentMonth, ...other } = props;
+    //TODO
 
   const isSelected =
-    !props.outsideCurrentMonth && highlightedDays.indexOf(props.day.date()) > 0;
+    !props.outsideCurrentMonth && highlightedDays.indexOf(day.date()) > 0;
 
   return (
     <Badge
@@ -70,7 +76,7 @@ export default function DateCalendarServerRequest() {
 
   const fetchHighlightedDays = (date) => {
     const controller = new AbortController();
-    fakeFetch(date, {
+    fetchEvents(date, {
       signal: controller.signal,
     })
       .then(({ daysToHighlight }) => {
