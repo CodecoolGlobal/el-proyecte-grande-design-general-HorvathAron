@@ -1,16 +1,16 @@
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import jwt_decode from "jwt-decode";
 import Button from "@mui/material/Button";
 import { useUser } from "../Context/UserProvider";
 
 const Login = () => {
-	const { user, login, logout } = useUser();
+	const {user, login, logout } = useUser();
 
-	const handleCallbackResponse = (response) => {
+	const handleCallbackResponse = useCallback ((response) => {
 		const userObject = jwt_decode(response.credential);
 		const creds = { name: userObject.name, email: userObject.email };
 		login(creds);
-	};
+	},[login]);
 
 	const handleSignOut = () => {
 		logout();
@@ -30,16 +30,13 @@ const Login = () => {
 				size: "large",
 			}
 		);
-	}, []);
+	}, [handleCallbackResponse]);
 
-	return (
-		<div>
-			<div id="signInDiv"></div>
+	return user!=null ? (
 			<Button variant="contained" onClick={() => handleSignOut()}>
 				Sign Out
 			</Button>
-		</div>
-	);
+			):(<div id="signInDiv"/>)
 };
 
 export default Login;

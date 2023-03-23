@@ -24,6 +24,7 @@ const UserProvider = ({ children }) => {
 			.then((r) => r.json())
 			.then((user) => {
 				setUser(user);
+				console.log(user)
 			})
 			.finally(() => {
 				setLoading(false);
@@ -39,7 +40,7 @@ const UserProvider = ({ children }) => {
 		}
 
 		getMe(token);
-	}, []);
+	}, [getMe]);
 
 	const login = (creds) => {
 		fetch("/lara/api/auth/login", {
