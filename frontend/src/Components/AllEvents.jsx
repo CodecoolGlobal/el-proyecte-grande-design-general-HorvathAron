@@ -1,11 +1,10 @@
 import React from "react";
-import {Link} from "react-router-dom";
 import Box from "@mui/material/Box";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import CardActions from "@mui/material/CardActions";
-import Button from "@mui/material/Button";
 import Card from '@mui/material/Card';
+import BasicModal from "./BasicModal";
 
 
 
@@ -16,11 +15,10 @@ const AllEvents = (allEvent) => {
 
 
     const getCardList = () => {
-        console.log(allEvent);
         return allEvent.events.map((event,index) =>
-            <Card variant="outlined">
+            <Card variant="outlined"key={index}>
                 <React.Fragment>
-                    <CardContent sx={{ m:2, p:2 , maxWidth: 200}} >
+                    <CardContent sx={{ m:2, p:2 , maxWidth: 200}} key={index} >
                         <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom align="right">
                             TagHolder
                         </Typography>
@@ -38,7 +36,7 @@ const AllEvents = (allEvent) => {
                         {event.event_date}
                     </Typography>
                     <CardActions>
-                        <Button size="small">Details</Button>
+                        <BasicModal/>
                     </CardActions>
                 </React.Fragment>
             </Card>

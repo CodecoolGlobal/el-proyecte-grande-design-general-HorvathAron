@@ -27,7 +27,7 @@ const Login = () => {
 			document.getElementById("signInDiv"),
 			{
 				theme: "outline",
-				size: "large",
+				size: "medium",
 			}
 		);
 	}, [handleCallbackResponse]);
