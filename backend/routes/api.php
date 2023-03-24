@@ -9,6 +9,7 @@ use App\Http\Controllers\ChatMessageController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\ParticipantController;
 use App\Http\Controllers\EventsTagsController;
+use App\Http\Controllers\CalendarController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,13 +31,10 @@ Route::get('/test', function (){
 });
 
 Route::get('get-all-user', [UserController::class, 'getUsers']);
-
-
 Route::get("auth/me",[UserController::class,'getMe']);
 Route::post("auth/login",[UserController::class,'login']);
 Route::get("auth/logout",[UserController::class,'logout']);
 Route::post('auth/register', [UserController::class, 'register']);
-
 Route::get('chat', [ChatMessageController::class, 'getMessageByUser']);
 
 Route::post('new-message', [ChatMessageController::class, 'addMessage']);
@@ -70,3 +68,5 @@ Route::delete('/tag/delete', [TagController::class, 'deleteTagById']);
 Route::get('/tag', [TagController::class, 'getTagById']);
 Route::post('/tag/new', [TagController::class, 'createNewTag']);
 Route::put('/tag/update', [TagController::class, 'changeTagById']);
+
+Route::get('/calendar', [CalendarController::class, 'getEventsByMonth']);
