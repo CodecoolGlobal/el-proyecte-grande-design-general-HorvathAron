@@ -5,6 +5,8 @@ import Typography from "@mui/material/Typography";
 import CardActions from "@mui/material/CardActions";
 import Card from '@mui/material/Card';
 import BasicModal from "./BasicModal";
+import Stack from '@mui/material/Stack';
+import Button from '@mui/material/Button';
 
 
 
@@ -31,6 +33,9 @@ const AllEvents = (allEvent) => {
                         <Typography variant="body2">
                             {event.description}
                         </Typography>
+                        <Stack spacing={2} direction="row">
+                            <Button variant="contained">Join</Button>
+                        </Stack>'
                     </CardContent>
                     <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom align="center">
                         {event.event_date}
