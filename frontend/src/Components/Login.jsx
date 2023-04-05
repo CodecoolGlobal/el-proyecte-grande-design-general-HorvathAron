@@ -7,11 +7,8 @@ const Login = () => {
 	const {user, login, logout } = useUser();
 
 	const handleCallbackResponse = useCallback ((response) => {
-		console.log(response);
 		const userObject = jwt_decode(response.credential);
 		const creds = { name: userObject.name, email: userObject.email };
-		console.log("MiMi");
-		console.log(creds);
 		login(creds);
 	},[login]);
 

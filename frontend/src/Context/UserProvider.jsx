@@ -6,7 +6,7 @@ import {
 	useState,
 } from "react";
 
-const UserContext = createContext();
+export const UserContext = createContext();
 
 const getToken = () => window.localStorage.getItem("token");
 const setToken = (token) => window.localStorage.setItem("token", token);
