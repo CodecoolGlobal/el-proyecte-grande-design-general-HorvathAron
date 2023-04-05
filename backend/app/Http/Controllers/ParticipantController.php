@@ -17,7 +17,6 @@ class ParticipantController extends Controller
         ];
 
         return response($response, 201);
-
     }
 
     function getEventsByUserId(Request $request)

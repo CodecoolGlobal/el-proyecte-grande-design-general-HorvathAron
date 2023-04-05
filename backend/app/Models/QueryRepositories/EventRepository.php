@@ -31,16 +31,6 @@ class EventRepository
             'event_date' => $event_date]);
 
         return $id;
-
-//        $newEvent = [
-//            'created_by' => $created_by,
-//            'title' => $title,
-//            'description' => $description,
-//            'event_date' => $event_date];
-//
-//        $event = Event::create($newEvent);
-//
-//        return $event->id;
     }
 
     public static function deleteEvent($id): int {
@@ -49,5 +39,12 @@ class EventRepository
             ->delete();
 
         return $rowsCount;
+    }
+
+    public static function getAllEventsWithParticipants() {
+        $events = DB::table('events')
+                    ->join('participants', 'events.id', '=', 'participants.event_id')
+                    ->get();
+        return $events;
     }
 }

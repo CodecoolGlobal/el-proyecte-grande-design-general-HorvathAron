@@ -19,6 +19,10 @@ class EventController extends Controller
         return response($response, 201);
     }
 
+    function getAllEventsWithParticipants(Request $request){
+        return \response(EventRepository::getAllEventsWithParticipants(), Response::HTTP_OK);
+    }
+
     function getEventById(Request $request)
     {
         if (!$request->has('id') || $request->id == null) return \response(['message'=>'No id parameter was given!'], Response::HTTP_NOT_FOUND);
