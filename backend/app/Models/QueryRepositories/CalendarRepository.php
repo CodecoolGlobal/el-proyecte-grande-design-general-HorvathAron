@@ -10,9 +10,12 @@ class CalendarRepository{
 
 
 
-public static function getEventsByMonth(int $month, int $year, int $userId)
+public static function getEventsByUser(int $month, int $year, int $userId)
 {
-    return DB::table('events')->where('created_by', $userId )->whereMonth('event_date', $month)->whereYear('event_date', $year)->get();
+    return DB::table('events')
+        ->where('created_by', $userId )
+        ->whereMonth('event_date', $month)
+        ->whereYear('event_date', $year)->get();
 }
 
 public static function getParticipatedEvents(int $month, int $year, int $userId)
@@ -23,6 +26,14 @@ public static function getParticipatedEvents(int $month, int $year, int $userId)
         ->whereMonth('event_date', $month)
         ->whereYear('event_date', $year)
         ->get();
+}
+
+public static function getEventsByDate(int $year, int $month, int $day)
+{
+    return DB::table('events')
+        ->whereDay('event_date', $day )
+        ->whereMonth('event_date', $month)
+        ->whereYear('event_date', $year)->get();
 }
 
 }

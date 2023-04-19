@@ -9,7 +9,14 @@ import { DateCalendar } from '@mui/x-date-pickers/DateCalendar';
 import { DayCalendarSkeleton } from '@mui/x-date-pickers/DayCalendarSkeleton';
 import axios from "axios";
 import { useUser } from "../Context/UserProvider";
-
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import Typography from "@mui/material/Typography";
+import Stack from "@mui/material/Stack";
+import Button from "@mui/material/Button";
+import CardActions from "@mui/material/CardActions";
+import BasicModal from "./BasicModal";
+import { useState } from 'react';
 
 
 function getDay(date) {
@@ -89,6 +96,8 @@ export default function DateCalendarServerRequest() {
   const [isLoading, setIsLoading] = React.useState(false);
   const [highlightedDays, setHighlightedDays] = React.useState([13]);
   const {user, login, logout } = useUser();
+  const [showChildComponent, setShowChildComponent] = useState(false);
+  const [events, setEvents] = useState(null);
 
 
   const fetchHighlightedDays = (date) => {
@@ -129,12 +138,51 @@ export default function DateCalendarServerRequest() {
     fetchHighlightedDays(date);
   };
 
-  return (
+  const  handleDayClick = async (e)=> {
+      const year = e.year();
+      const month = e.month()+1;
+      const day = e.date();
+      const response =  await axios.get(`http://gathergo.com/lara/api/calendar/events?year=${year}&month=${month}&day=${day}`);
+      const events = response.data;
+      setShowChildComponent(true);
+      setEvents(events);
+  }
+
+    function ChildComponent() {
+        return (
+            events.map( (event) => (
+                <Card variant="outlined"key={event.id}>
+                    <React.Fragment>
+                        <CardContent sx={{ m:2, p:2 , maxWidth: 200}} key={event.id} >
+                            <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom align="right">
+                                TagHolder
+                            </Typography>
+                            <Typography variant="h5" component="div">
+                                {event.title}
+                            </Typography>
+                            <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                                {event.date}
+                            </Typography>
+                            <Typography variant="body2">
+                                {event.description}
+                            </Typography>
+
+                        </CardContent>
+
+                    </React.Fragment>
+                </Card>
+            ))
+        );
+    }
+
+
+    return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <DateCalendar
         defaultValue={initialValue}
         loading={isLoading}
         onMonthChange={handleMonthChange}
+        onChange={handleDayClick}
         renderLoading={() => <DayCalendarSkeleton />}
         slots={{
           day: ServerDay,
@@ -145,6 +193,9 @@ export default function DateCalendarServerRequest() {
           },
         }}
       />
+        {showChildComponent && <ChildComponent />}
+
     </LocalizationProvider>
+
   );
 }

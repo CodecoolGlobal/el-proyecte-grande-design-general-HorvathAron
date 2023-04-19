@@ -71,3 +71,4 @@ Route::put('/tag/update', [TagController::class, 'changeTagById']);
 
 Route::get('/calendar/user-events', [CalendarController::class, 'getEventsByMonth']);
 Route::get('/calendar/participated-events', [CalendarController::class, 'getParticipatedEvents']);
+Route::get('/calendar/events', [CalendarController::class, 'getEventsByDate']);
