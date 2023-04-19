@@ -15,4 +15,14 @@ public static function getEventsByMonth(int $month, int $year, int $userId)
     return DB::table('events')->where('created_by', $userId )->whereMonth('event_date', $month)->whereYear('event_date', $year)->get();
 }
 
+public static function getParticipatedEvents(int $month, int $year, int $userId)
+{
+    return DB::table('events')
+        ->join('participants', 'event_id', '=', 'events.id')
+        ->where('user_id',$userId)
+        ->whereMonth('event_date', $month)
+        ->whereYear('event_date', $year)
+        ->get();
+}
+
 }
