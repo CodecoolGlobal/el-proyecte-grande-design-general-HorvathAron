@@ -17,7 +17,7 @@ function getDay(date) {
 }
 
 function getDates(events) {
-    const eventDates = [];
+    const eventDates = [0];
     events.map((event) => {
         eventDates.push(getDay(event.event_date));
     });
@@ -38,10 +38,11 @@ function fetchEvents(date, user, { signal }) {
         const participatedResponse =  await axios.get(`http://gathergo.com/lara/api/calendar/participated-events?userId=${userId}&month=${month}&year=${year}`);
         const userEvents = userResponse.data;
         const participatedEvents = participatedResponse.data;
+
         const events = userEvents.concat(participatedEvents);
 
         const daysToHighlight = getDates(events);
-        console.log(daysToHighlight);
+
         resolve({ daysToHighlight });
     }, 500);
 

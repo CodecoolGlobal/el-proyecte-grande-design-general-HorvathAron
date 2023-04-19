@@ -55,7 +55,7 @@ Route::delete('/events/delete', [EventController::class, 'deleteEvent']);
 
 Route::post('/participants/event-id', [ParticipantController::class, 'getParticipantsByEventId']);
 Route::post('/participants/user-id', [ParticipantController::class, 'getEventsByUserId']);
-Route::post('/participants/add', [ParticipantController::class, 'addParticipantToEvent']);
+Route::get('/participants/add', [ParticipantController::class, 'addParticipantToEvent']);
 Route::delete('/participants/delete', [ParticipantController::class, 'deleteParticipantFromEvent']);
 
 Route::post('/events-tags/event-id', [EventsTagsController::class, 'getTagsByEventId']);
