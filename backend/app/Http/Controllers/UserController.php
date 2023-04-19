@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
-use App\Models\QueryRepositories\Userrepository;
+use App\Models\QueryRepositories\UserRepository;
 use Laravel\Sanctum\PersonalAccessToken;
 
 class UserController extends Controller
@@ -25,7 +25,7 @@ class UserController extends Controller
 
     function login(Request $request)
     {
-        $user = Userrepository::findUser($request);
+        $user = UserRepository::findUser($request);
         if (!$user) {
             $user = $this->register($request);
         }

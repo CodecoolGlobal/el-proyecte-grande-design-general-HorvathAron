@@ -23,7 +23,7 @@ const style = {
 
   return (
     <div>
-      <Button onClick={handleOpen}>Open modal</Button>
+      <Button onClick={handleOpen}>Details</Button>
       <Modal
         open={open}
         onClose={handleClose}
@@ -32,10 +32,10 @@ const style = {
       >
         <Box sx={style}>
           <Typography id="modal-modal-title" variant="h6" component="h2">
-            Text in a modal
+            News
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
+            News about the event.
           </Typography>
         </Box>
       </Modal>
