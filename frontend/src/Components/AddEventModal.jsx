@@ -7,7 +7,6 @@ import TextField from "@mui/material/TextField";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-import fetchUrl from "./Fetch";
 import { useUser } from "../Context/UserProvider";
 
 const style = {
@@ -32,20 +31,21 @@ const AddEventModal = () => {
 	let date = React.useRef("");
 
 	const handleSubmit = () => {
-		handleClose();
 		const body = {
 			created_by: user.user.id,
-			title: title,
-			description: desc,
-			event_date: date,
+			title: title.current,
+			description: desc.current,
+			event_date: date.current,
 		};
-		//fetchUrl.post("http://gathergo.com/lara/api/events/add", body);
-		fetch("/lara/api/events/add", {
+		fetch("lara/api/events/add", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
 			},
 			body: JSON.stringify(body),
+		}).then((res) => {
+			console.log(res);
+			handleClose();
 		});
 	};
 	const handleText = (e, ref) => {
