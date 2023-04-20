@@ -92,6 +92,7 @@ export default function DateCalendarServerRequest() {
   const {user} = useUser();
   const [showChildComponent, setShowChildComponent] = useState(false);
   const [events, setEvents] = useState(null);
+  const [refresh, setRefresh] = useState(true);
 
 
   const fetchHighlightedDays = (date) => {
@@ -140,10 +141,17 @@ export default function DateCalendarServerRequest() {
       const events = response.data;
       setShowChildComponent(true);
       setEvents(events);
-  }
+
+      }
+
 
     function ChildComponent() {
-        return <AllEvents events={events}/>
+
+      const props = {
+          events: events,
+          setRefresh: setRefresh
+      }
+        return <AllEvents events={props}/>
     }
 
 

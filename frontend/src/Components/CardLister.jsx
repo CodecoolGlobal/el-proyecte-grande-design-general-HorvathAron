@@ -4,7 +4,7 @@ import { useEffectOnce } from "../hook/useEffectOnce";
 import fetchUrl from "./Fetch";
 const CardLister = () => {
 	const [allEvent, setAllEvent] = useState([]);
-	const [refresh, setRefresh] = useState([true]);
+	const [refresh, setRefresh] = useState(true);
 
 	useEffect(() => {
 		if (refresh) {

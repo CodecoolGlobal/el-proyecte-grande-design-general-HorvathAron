@@ -52,7 +52,7 @@ const AddEventModal = (props) => {
 		ref.current = e.target.value;
 	};
 	const handleDate = (newValue) => {
-		date.current = `${newValue.year()}-${newValue.month()}-${newValue.date()}`;
+		date.current = `${newValue.year()}-${newValue.month()+1}-${newValue.date()}`;
 	};
 
 	return (

@@ -9,6 +9,8 @@ import AddEventModal from "./AddEventModal";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import { UserContext } from "../Context/UserProvider";
+import {useUser} from "../Context/UserProvider";
+
 
 const getToken = () => window.localStorage.getItem("token");
 
