@@ -42,7 +42,7 @@ const AllEvents = (allEvent) => {
 			});
 		}
 
-		return allEvent.events.map((event, index) => (
+		return allEvent.events.events.map((event, index) => (
 			<Card variant="outlined" key={index}>
 				<React.Fragment>
 					<CardContent sx={{ m: 2, p: 2, maxWidth: 200 }} key={index}>
@@ -104,7 +104,7 @@ const AllEvents = (allEvent) => {
 			>
 				{CardList()}
 			</Box>
-			<AddEventModal />
+			<AddEventModal setRefresh={allEvent.events.setRefresh} />
 		</div>
 	);
 };
