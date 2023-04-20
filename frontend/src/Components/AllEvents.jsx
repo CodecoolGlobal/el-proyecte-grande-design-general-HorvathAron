@@ -7,7 +7,9 @@ import Card from '@mui/material/Card';
 import BasicModal from "./BasicModal";
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
-import {UserContext} from "../Context/UserProvider"
+import { useUser } from "../Context/UserProvider";
+
+
 
 
 const getToken = () => window.localStorage.getItem("token");
@@ -24,10 +26,9 @@ const AllEvents = (allEvent) => {
     // console.log(user);
 
     const CardList = () => {
+        const {user} = useUser();
 
-        let user = useContext(UserContext);
-
-        let userId = (user.user == null) ? null : user.user.user.id;
+        let userId = (user == null) ? null : user.user.id;
 
         function joinEvent(event, e){
             let eventId = event.id;
@@ -41,10 +42,11 @@ const AllEvents = (allEvent) => {
                 .then((response) => {console.log(response)} )
         }
 
+
         return allEvent.events.map((event,index) =>
             <Card variant="outlined"key={index}>
                 <React.Fragment>
-                    <CardContent sx={{ m:2, p:2 , maxWidth: 200}} key={index} >
+                    <CardContent sx={{ m:2, p:2 , width: 200, height: 250}} key={index} >
                         <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom align="right">
                             TagHolder
                         </Typography>
@@ -58,11 +60,15 @@ const AllEvents = (allEvent) => {
                             {event.description}
                         </Typography>
                         {
-                            userId != null &&
-                                <Stack spacing={2} direction="row">
-                                    <Button variant="contained" onClick={(e) => { joinEvent(event,e); }}>Join</Button>
-                                </Stack>
+                                userId == event.created_by ?
+                                    <Typography variant="body2">
+                                        Owner
+                                    </Typography> : userId != null ?
+                                        <Stack spacing={2} direction="row">
+                                            <Button variant="contained" onClick={(e) => { joinEvent(event,e); }}>Join</Button>
+                                        </Stack> : null
                         }
+
                     </CardContent>
                     <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom align="center">
                         {event.event_date}

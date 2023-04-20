@@ -1,22 +1,16 @@
 import * as React from 'react';
+import {useState} from 'react';
 import PropTypes from 'prop-types';
 import dayjs from 'dayjs';
 import Badge from '@mui/material/Badge';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { PickersDay } from '@mui/x-date-pickers/PickersDay';
-import { DateCalendar } from '@mui/x-date-pickers/DateCalendar';
-import { DayCalendarSkeleton } from '@mui/x-date-pickers/DayCalendarSkeleton';
+import {AdapterDayjs} from '@mui/x-date-pickers/AdapterDayjs';
+import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
+import {PickersDay} from '@mui/x-date-pickers/PickersDay';
+import {DateCalendar} from '@mui/x-date-pickers/DateCalendar';
+import {DayCalendarSkeleton} from '@mui/x-date-pickers/DayCalendarSkeleton';
 import axios from "axios";
-import { useUser } from "../Context/UserProvider";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import Typography from "@mui/material/Typography";
-import Stack from "@mui/material/Stack";
-import Button from "@mui/material/Button";
-import CardActions from "@mui/material/CardActions";
-import BasicModal from "./BasicModal";
-import { useState } from 'react';
+import {useUser} from "../Context/UserProvider";
+import AllEvents from "./AllEvents";
 
 
 function getDay(date) {
@@ -95,7 +89,7 @@ export default function DateCalendarServerRequest() {
   const requestAbortController = React.useRef(null);
   const [isLoading, setIsLoading] = React.useState(false);
   const [highlightedDays, setHighlightedDays] = React.useState([13]);
-  const {user, login, logout } = useUser();
+  const {user} = useUser();
   const [showChildComponent, setShowChildComponent] = useState(false);
   const [events, setEvents] = useState(null);
 
@@ -149,30 +143,7 @@ export default function DateCalendarServerRequest() {
   }
 
     function ChildComponent() {
-        return (
-            events.map( (event) => (
-                <Card variant="outlined"key={event.id}>
-                    <React.Fragment>
-                        <CardContent sx={{ m:2, p:2 , maxWidth: 200}} key={event.id} >
-                            <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom align="right">
-                                TagHolder
-                            </Typography>
-                            <Typography variant="h5" component="div">
-                                {event.title}
-                            </Typography>
-                            <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                                {event.date}
-                            </Typography>
-                            <Typography variant="body2">
-                                {event.description}
-                            </Typography>
-
-                        </CardContent>
-
-                    </React.Fragment>
-                </Card>
-            ))
-        );
+        return <AllEvents events={events}/>
     }
 
 
