@@ -7,8 +7,18 @@ use App\Models\QueryRepositories\CalendarRepository;
 
 class CalendarController extends Controller
 {
-    function getEventsByMonth(Request $request) 
+    function getEventsByMonth(Request $request)
     {
-        return CalendarRepository::getEventsByMonth($request->query('month'),$request->query('year'), $request->query('userId'));
+        return CalendarRepository::getEventsByUser($request->query('month'),$request->query('year'), $request->query('userId'));
+    }
+
+    function getParticipatedEvents(Request $request)
+    {
+        return CalendarRepository::getParticipatedEvents($request->query('month'),$request->query('year'), $request->query('userId'));
+    }
+
+    function getEventsByDate(Request $request)
+    {
+        return CalendarRepository::getEventsByDate($request->query('year'), $request->query('month'), $request->query('day'));
     }
 }

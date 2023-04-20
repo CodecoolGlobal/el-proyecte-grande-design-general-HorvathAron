@@ -9,23 +9,26 @@ import AddEventModal from "./AddEventModal";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import { UserContext } from "../Context/UserProvider";
+import {useUser} from "../Context/UserProvider";
+
 
 const getToken = () => window.localStorage.getItem("token");
 
 const AllEvents = (allEvent) => {
-	// const [user, setUser] = useState(null);
 
-	let token = getToken();
-	console.log("Token: ");
-	console.log(token);
+    // const [user, setUser] = useState(null);
 
-	// console.log('User: ');
-	// console.log(user);
+    let token = getToken();
+    console.log('Token: ');
+    console.log(token);
 
-	const CardList = () => {
-		let user = useContext(UserContext);
+    // console.log('User: ');
+    // console.log(user);
 
-		let userId = user.user == null ? null : user.user.user.id;
+    const CardList = () => {
+        const {user} = useUser();
+
+        let userId = (user == null) ? null : user.user.id;
 
 		function joinEvent(event, e) {
 			let eventId = event.id;
@@ -42,53 +45,45 @@ const AllEvents = (allEvent) => {
 			});
 		}
 
-		return allEvent.events.events.map((event, index) => (
-			<Card variant="outlined" key={index}>
-				<React.Fragment>
-					<CardContent sx={{ m: 2, p: 2, maxWidth: 200 }} key={index}>
-						<Typography
-							sx={{ fontSize: 14 }}
-							color="text.secondary"
-							gutterBottom
-							align="right"
-						>
-							TagHolder
-						</Typography>
-						<Typography variant="h5" component="div">
-							{event.title}
-						</Typography>
-						<Typography sx={{ mb: 1.5 }} color="text.secondary">
-							{event.date}
-						</Typography>
-						<Typography variant="body2">{event.description}</Typography>
-						{userId != null && (
-							<Stack spacing={2} direction="row">
-								<Button
-									variant="contained"
-									onClick={(e) => {
-										joinEvent(event, e);
-									}}
-								>
-									Join
-								</Button>
-							</Stack>
-						)}
-					</CardContent>
-					<Typography
-						sx={{ fontSize: 14 }}
-						color="text.secondary"
-						gutterBottom
-						align="center"
-					>
-						{event.event_date}
-					</Typography>
-					<CardActions>
-						<BasicModal />
-					</CardActions>
-				</React.Fragment>
-			</Card>
-		));
-	};
+
+        return allEvent.events.events.map((event,index) =>
+            <Card variant="outlined"key={index}>
+                <React.Fragment>
+                    <CardContent sx={{ m:2, p:2 , width: 200, height: 250}} key={index} >
+                        <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom align="right">
+                            TagHolder
+                        </Typography>
+                        <Typography variant="h5" component="div">
+                            {event.title}
+                        </Typography>
+                        <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                            {event.date}
+                        </Typography>
+                        <Typography variant="body2">
+                            {event.description}
+                        </Typography>
+                        {
+                                userId == event.created_by ?
+                                    <Typography variant="body2">
+                                        Owner
+                                    </Typography> : userId != null ?
+                                        <Stack spacing={2} direction="row">
+                                            <Button variant="contained" onClick={(e) => { joinEvent(event,e); }}>Join</Button>
+                                        </Stack> : null
+                        }
+
+                    </CardContent>
+                    <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom align="center">
+                        {event.event_date}
+                    </Typography>
+                    <CardActions>
+                        <BasicModal/>
+                    </CardActions>
+                </React.Fragment>
+            </Card>
+
+        )
+    }
 
 	return (
 		<div>
