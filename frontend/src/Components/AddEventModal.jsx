@@ -21,7 +21,7 @@ const style = {
 	p: 4,
 };
 
-const AddEventModal = () => {
+const AddEventModal = (props) => {
 	const { user } = useUser();
 	const [open, setOpen] = React.useState(false);
 	const handleOpen = () => setOpen(true);
@@ -43,19 +43,16 @@ const AddEventModal = () => {
 				"Content-Type": "application/json",
 			},
 			body: JSON.stringify(body),
-		}).then((res) => {
-			console.log(res);
+		}).then(() => {
+			props.setRefresh(true);
 			handleClose();
 		});
 	};
 	const handleText = (e, ref) => {
 		ref.current = e.target.value;
-		console.log(ref.current);
 	};
 	const handleDate = (newValue) => {
 		date.current = `${newValue.year()}-${newValue.month()}-${newValue.date()}`;
-
-		console.log(date.current);
 	};
 
 	return (
