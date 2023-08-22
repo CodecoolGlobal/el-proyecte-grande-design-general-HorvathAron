@@ -1,97 +1,130 @@
-# El Proyecte Grande - Design
+# Ball Shop
 
-## Story
+<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
-As your Codecool Journey comes closer to its conclusion, the time has come for a final Teamwork Project, 
-that will put to test all of the programming skills you've obtained so far (and some new ones you will learn on the way)!
+## About
 
-You have the freedom of choosing your teammates (assemble a team of 3-4 students) and the project's topic this time.
-Think of an app that you would find useful in your daily activities, a tool that an employee of a certain industry might crave,
-a fun game or something completely out of the box.
+This project is for managing your events, participate and chat with them, and handle the events in a calendar. I used PHP for backend and React and MUI for frontend.
 
-This project is meant to last until the end of the course. While Codecool will not give you any direct tasks to fulfill regarding your project, 
-during each sprint,you and your team are expected to make incremental changes in a Scrum way, developing the project further and further,
-adding new features, technologies, etc.
+## Table of Contents
 
-***¡Comience El Proyecte Grande!***
+- [Prerequisites](#prerequisites)
+- [Backend Setup](#backend-setup)
+    - [First step](#first-step)
+    - [Second step](#second-step)
+    - [Third step](#third-step)
+- [Frontend Setup](#frontend-setup)
+- [Conclusion](#conclusion)
+- [Contact](#contact)
 
-## What are you going to learn?
+## Prerequisites
 
-- how to design IT products
-- how to design applications
-- how to write a Product Design Document
-- how to write an Application Design Document
-- how a Design Critique looks like
-- how to showcase product designs and ideas without actually making one
+Before getting started, make sure you have the following prerequisites installed on your system:
 
-## Tasks
+### Backend
 
-1. The first phase/sprint of El Proyecte Grande focuses on designing the product, before the development work begins.
-    - All the requirements from tasks below are fulfilled during this sprint.
-    - During this phase, the team DOES NOT work on the project in a technical manner. In other words - not a single line of code is written during this sprint.
+- Composer v2.5.5
+- PHP v8+ ![PHP](https://img.shields.io/badge/php-%23777BB4.svg?style=for-the-badge&logo=php&logoColor=white)
+- Laravel v10+ ![Laravel](https://img.shields.io/badge/laravel-%23FF2D20.svg?style=for-the-badge&logo=laravel&logoColor=white)
+- MySQL v8 ![MySQL](https://img.shields.io/badge/mysql-%2300f.svg?style=for-the-badge&logo=mysql&logoColor=white)
 
-2. Assemble a Scrum team for your project.
-    - The team consists of 3-4 students, including yourself.
-    - The team has a Scrum Master and a Project Owner (both roles cannot be taken by the same person).
-    - The team has selected a mentor, that will serve as a dedicated Project Mentor.
+### Frontend
 
-3. Create a High Level Product Design.
-    - A document is created (in Word, Google Docs or Confluence) that serves as a Product Design Document (PDD).
-    - PDD is not a technical documentation. It serves as a general concept/idea for the Product and answers some important business questions. The usage of technical language in PDD is limited, so that a non-technical person can also read and understand it.
-    - PDD describes the Product and answers the following questions:
-  - What problem does the Product solve?
-  - What is the target audience for this Product?
-  - What are the target platforms for this Product (desktop, mobile, web, etc)?
-  - What business model would fit your Product? Free to use, in app purchases, pay to use, subscription?
+- nodeJS v19.8.1 ![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white) (Developed and tested with this version)
 
-4. Submit your PDD to critique by your Project Mentor
-    - Team's Product Owner arranges a Product Design Critique with the Team's Project mentor.
-    - The team presents their Product Design and describes ideas to the Project Mentor.
-    - The team answers all questions the Project Mentor asks regarding the Product.
-    - The team receives feedback from the Project Mentor and draws conclusions from it, regarding what is missing or what could be improved in their Product Design.
-    - Based on the Project Mentor's feedback, improvements to the PDD are made.
-    - Team's Product Owner arranges a follow-up meeting with the Team's Project mentor,  during which they present the improved version of the design.
+- ![MUI Logo](https://img.shields.io/badge/Material%20UI-007FFF?style=for-the-badge&logo=mui&logoColor=white)
+- ![JavaScript Logo](https://img.shields.io/badge/JavaScript-323330?style=for-the-badge&logo=javascript&logoColor=F7DF1E)
 
-5. Create a High Level Application Design.
-    - A document is created (in Word, Google Docs or Confluence) that serves as an Application Design Document (ADD).
-    - ADD is a technical documentation, containing details about Application's architecture, design patterns, utilized technologies, etc. It does not focus about the purpose of the Product or its ideas, but on the implementation with use of programming tools.
-    - ADD describes the Application and answers the following questions:
-  - What architecture and/or design patters the Application is going to use? Include some UMLs, flowcharts, sketches, etc.
-  - What is going to be the Application's main backend technology? [ASP.NET, Java Spring, Python Django, NodeJS, etc]
-  - What is going to be the Application's main frontend technology? [Razor Pages, Thymeleaf, Jinja, Angular, etc]
-  - What is going to be the Application's main database solution? [Microsoft SQL Server, Oracle MySQL, PostgreSQL, NoSQL solution, etc]
-  - Are there going to be any additional technologies used by the Application?
-  - Propose some early technical concepts for some of the major features of the Application.
+## Backend Setup
 
-6. Submit your ADD to critique by your Project Mentor
-    - Team's Product Owner arranges an Application Design Critique with the Team's Project mentor.
-    - The team presents their Application Design and describes ideas to the Project Mentor.
-    - The team answers all questions the Project Mentor asks regarding the Application.
-    - The team receives feedback from the Project Mentor and draws conclusions from it, regarding what is missing or what could be improved in their Application Design.
-    - Based on the Project Mentor's feedback, improvements to the ADD are made.
-    - Team's Product Owner arranges a follow-up meeting with the Team's Project mentor,  during which they present the improved version of the design.
+Follow these steps to set up the project:
 
-7. Prepare a Product Pitch as your demo presentation for this sprint
-    - A presentation is created (in PowerPoint, Slides, etc) for the demo's purpose.
-    - The presentation doesn't directly contain the PDD and the ADD, but summarizes them in a shorter and more comprehensive form.
-    - The presentation consists of mostly images (sketches, mockups, notes) rather than plain text.
-    - The presentation is designed and presented in a way, that would convince the audience that the Product you've envisioned is going to be great, useful and innovative. The audience should be willing to use the Product once it's available.
-    - While it's mostly the Product Owner's role to present the Product to the audience, each team member has a role during the presentation.
-    - The team answers all the questions the audience has to ask about their Product.
-    - The team collects feedback from the audience about their Product and draws conclusions from it.
+### First step
 
-## General requirements
+1. Create a new file called `.env` and copy the contents from `.env.example`.
+2. Fill in the database variables in the `.env` file with the correct database information. Here's a sample:
 
-None
+   ```
+   DB_CONNECTION=mysql
+   DB_HOST=127.0.0.1
+   DB_PORT=3306
+   DB_DATABASE=myDatabase
+   DB_USERNAME=root
+   DB_PASSWORD=root
+   ```
 
-## Hints
+   You may need to modify other variables in the file if necessary.
 
+### Second step
 
+After cloning the repository and opening it, execute the following commands in your terminal:
 
-## Background materials
+1. Change directory to the `backend` folder:
 
-- <i class="far fa-exclamation"></i> [Definition of Done](project/curriculum/materials/pages/methodology/definition-of-done.md)
-- <i class="far fa-exclamation"></i> [Product Design](https://www.smashingmagazine.com/2018/01/comprehensive-guide-product-design/)
-- <i class="far fa-exclamation"></i> [Application Design](https://xd.adobe.com/ideas/principles/web-design/web-page-design/)
-- <i class="far fa-exclamation"></i> [Agile Project Management](https://journey.code.cool/v2/project/curriculum/materials/pages/methodology/agile-project-management.md)
-- <i class="far fa-exclamation"></i> [Sales Pitch Examples](https://www.saleshacker.com/sales-pitch-examples/)
+`cd backend`
+
+2. Run the `setup.php` script, which performs the following actions:
+
+`php setup.php`
+
+- Installs the project dependencies with Composer:
+  usually:
+
+  ```
+  composer install
+  ```
+
+- Executes the Laravel migrations:
+  ```
+  php artisan migrate
+  ```
+- Seeds the database with initial data:
+  ```
+  php artisan seed
+  ```
+
+Make sure all these commands are successfully executed.
+
+Additionally, check your `.env` file to ensure that the **APP_KEY** variable is filled. If it is not filled, generate a new key by running the following command in the terminal:
+
+```
+php artisan key:generate
+```
+
+### Third step
+
+If you are using Apache server, there's no additional setup required. However, if you are not using Apache, run the following command in the terminal:
+
+```
+php artisan serve
+```
+
+This command will start the development server, and you will be able to access the home page of the project.
+
+## Frontend Setup
+
+First change directory to the `frontend` folder:
+
+`cd frontend`
+
+- install dependencies
+
+```
+npm install
+```
+
+- after this installiation you just need to run the dev server
+
+```
+npm run start
+```
+
+## Conclusion
+
+This project is under development, features like chating and more aren't implemented yet.
+
+## Contact
+
+If you have any questions about the project feel free to get in touch with me:
+
+`ggabor.gabor25@gmail.com`
