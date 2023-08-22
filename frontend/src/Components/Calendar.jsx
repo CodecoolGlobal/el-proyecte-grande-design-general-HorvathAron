@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
 import dayjs from 'dayjs';
 import Badge from '@mui/material/Badge';
@@ -91,12 +91,40 @@ export default function DateCalendarServerRequest() {
   const [highlightedDays, setHighlightedDays] = React.useState([13]);
   const {user} = useUser();
   const [showChildComponent, setShowChildComponent] = useState(false);
-  const [events, setEvents] = useState(null);
-  const [refresh, setRefresh] = useState(true);
+  const [events, setEvents] = useState([]);
+  const [refresh, setRefresh] = useState(false);
+  const [year, setYear] = useState();
+  const [month, setMonth] = useState();
+  const [day, setDay] = useState();
 
+  useEffect(() => {
+      if (refresh) {
+
+          axios.get(`http://gathergo.com/lara/api/calendar/events?year=${year}&month=${month}&day=${day}`)
+               .then((response) => setEvents(response.data));
+
+          setHighlightedDays(fetchDaysToHighLight());
+
+          setShowChildComponent(true);
+          setRefresh(false);
+      }
+  },[refresh]);
+
+  const fetchDaysToHighLight = async () => {
+      const userId = user.user.id;
+      const userResponse =  await axios.get(`http://gathergo.com/lara/api/calendar/user-events?userId=${userId}&month=${month}&year=${year}`);
+      const participatedResponse =  await axios.get(`http://gathergo.com/lara/api/calendar/participated-events?userId=${userId}&month=${month}&year=${year}`);
+      const userEvents = userResponse.data;
+      const participatedEvents = participatedResponse.data;
+
+      const events = userEvents.concat(participatedEvents);
+
+      const daysToHighlight = getDates(events);
+      return daysToHighlight;
+  }
 
   const fetchHighlightedDays = (date) => {
-
+      console.log(date);
     const controller = new AbortController();
     fetchEvents(date, user, {
       signal: controller.signal,
@@ -137,23 +165,22 @@ export default function DateCalendarServerRequest() {
       const year = e.year();
       const month = e.month()+1;
       const day = e.date();
+
       const response =  await axios.get(`http://gathergo.com/lara/api/calendar/events?year=${year}&month=${month}&day=${day}`);
       const events = response.data;
       setShowChildComponent(true);
       setEvents(events);
+      setYear(year);
+      setMonth(month);
+      setDay(day);
 
       }
 
 
-    function ChildComponent() {
-
-      const props = {
-          events: events,
-          setRefresh: setRefresh
-      }
-        return <AllEvents events={props}/>
+    const props = {
+        events: events,
+        setRefresh: setRefresh
     }
-
 
     return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -172,7 +199,7 @@ export default function DateCalendarServerRequest() {
           },
         }}
       />
-        {showChildComponent && <ChildComponent />}
+        {showChildComponent && <AllEvents events={props}/>}
 
     </LocalizationProvider>
 
